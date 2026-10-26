@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cañada Champions League · FC 27</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+:root{--bg:#070b19;--panel:#10172b;--panel2:#151e35;--gold:#eab308;--muted:#9ba8c4}
+*{box-sizing:border-box}body{background:radial-gradient(ellipse at 50% -10%,#17264c 0%,var(--bg) 48%);color:#f8fafc;font-family:Inter,ui-sans-serif,system-ui,-apple-system,sans-serif;min-height:100vh}
+.glass{background:linear-gradient(145deg,rgba(22,32,57,.94),rgba(12,18,35,.97));border:1px solid rgba(234,179,8,.14);box-shadow:0 12px 35px #0003}
+.gold{color:var(--gold)}.btn{border:1px solid #33415f;background:#18233e;padding:.65rem .9rem;border-radius:.75rem;font-weight:650;transition:.2s;cursor:pointer}.btn:hover{border-color:var(--gold);transform:translateY(-1px)}.btn-primary{background:var(--gold);color:#111827;border-color:var(--gold)}.btn-danger{border-color:#7f1d1d;color:#fecaca;background:#35151f}.navbtn{padding:.75rem .85rem;border-radius:.75rem;color:#b7c2d9;white-space:nowrap;cursor:pointer}.navbtn.active,.navbtn:hover{background:#26314b;color:#fff}.navbtn.active{box-shadow:inset 0 -2px var(--gold)}.field{width:100%;background:#090f20;border:1px solid #34415d;border-radius:.65rem;padding:.7rem .8rem;color:#fff;outline:none}.field:focus{border-color:var(--gold)}.field option{background:#10172b}.label{display:block;font-size:.78rem;color:#b5c0d5;margin:0 0 .35rem}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:680px}th{font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:#aebbd4;text-align:left;padding:.85rem .7rem;background:#0c1326}td{padding:.8rem .7rem;border-bottom:1px solid #27324a;font-size:.9rem}tbody tr:hover{background:#ffffff06}.badge{font-size:.7rem;padding:.25rem .5rem;border-radius:999px;background:#273450;color:#dce5f8}.team-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(135deg,#243458,#111a30);border:1px solid #394968;font-size:1.25rem}.statnum{font-size:1.7rem;font-weight:800;letter-spacing:-.04em}.hidden{display:none!important}.modal-bg{position:fixed;inset:0;background:#02040bd9;display:grid;place-items:center;padding:1rem;z-index:50}.modal{width:min(720px,100%);max-height:90vh;overflow:auto}.toast{position:fixed;bottom:1rem;right:1rem;background:#16243d;border:1px solid #eab30888;padding:.8rem 1rem;border-radius:1rem;z-index:80;box-shadow:0 12px 30px #0008}.hero-orb{position:absolute;border:1px solid #eab30830;border-radius:50%;width:340px;height:340px;right:-100px;top:-150px;pointer-events:none}.smallmuted{font-size:.8rem;color:var(--muted)}.news-img{width:100%;height:180px;object-fit:contain;background:#0b1120;cursor:pointer;transition:.2s;padding:4px}.news-img:hover{opacity:.9}.pill{border:1px solid #34415d;border-radius:999px;padding:.35rem .7rem;color:#cbd5e1;font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="max-w-7xl mx-auto px-4 md:px-6 pb-12">
+<header class="flex flex-col md:flex-row md:items-center justify-between gap-4 py-5 border-b border-white/10">
+ <div class="flex items-center gap-3"><div class="w-12 h-12 rounded-2xl bg-yellow-500/10 border border-yellow-500/40 grid place-items-center"><i data-lucide="trophy" class="gold w-7 h-7"></i></div><div><div class="text-xs uppercase tracking-[.25em] gold font-bold">Temporada 26/27</div><h1 class="text-xl md:text-2xl font-black tracking-tight">CAÑADA <span class="gold">CHAMPIONS</span> LEAGUE</h1><p class="text-xs text-slate-400">EA SPORTS FC 27 · La gloria se juega entre amigos</p></div></div>
+ <div class="flex flex-wrap items-center gap-2"><span class="pill"><span class="inline-block w-2 h-2 rounded-full bg-emerald-400 mr-2"></span>Competición activa</span><button class="btn" onclick="openAdmin()"><i data-lucide="shield-check" class="inline w-4 h-4 mr-1"></i>Admin</button></div>
+</header>
+<nav class="flex gap-1 overflow-x-auto py-3 border-b border-white/10" id="nav">
+<button class="navbtn active" data-view="inicio">Inicio</button><button class="navbtn" data-view="clasificacion">Clasificación</button><button class="navbtn" data-view="lideres">Líderes</button><button class="navbtn" data-view="partidos">Partidos</button><button class="navbtn" data-view="h2h">H2H</button><button class="navbtn" data-view="pronosticos">Pronósticos</button><button class="navbtn" data-view="noticias">Noticias</button><button class="navbtn" data-view="mvp">Votar MVP</button>
+</nav>
+<main class="pt-6">
+<section id="view-inicio" class="view space-y-6">
+ <div class="glass rounded-3xl p-6 md:p-9 relative overflow-hidden"><div class="hero-orb"></div><div class="relative max-w-2xl"><span class="badge gold">⚽ TEMPORADA OFICIAL 26/27</span><h2 class="text-3xl md:text-5xl font-black mt-4 leading-tight">Una copa.<br><span class="gold">Siete equipos de amigos.</span><br>Una sola leyenda.</h2><p class="text-slate-300 mt-4 max-w-xl">La competición de FC 27 donde los piques se convierten en historia. Consulta la clasificación, sigue las estadísticas y vota al MVP.</p><div class="flex flex-wrap gap-3 mt-6"><button class="btn btn-primary" onclick="setView('clasificacion')">Ver clasificación <i data-lucide="arrow-up-right" class="inline w-4 h-4"></i></button><button class="btn" onclick="setView('partidos')">Resultados y partidos</button></div></div></div>
+ <div class="grid grid-cols-2 lg:grid-cols-4 gap-3" id="homeStats"></div>
+ <div><div class="flex items-end justify-between mb-4"><div><p class="gold text-xs tracking-[.2em] font-bold uppercase">Los protagonistas</p><h2 class="text-2xl font-bold mt-1">Entrenadores y equipos</h2></div><span class="smallmuted">Temporada 26/27</span></div><div id="teamsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3"></div></div>
+ <div class="grid lg:grid-cols-2 gap-5"><div class="glass rounded-2xl p-5"><div class="flex justify-between items-center mb-4"><h3 class="font-bold text-lg">Últimos resultados</h3><button class="text-sm gold" onclick="setView('partidos')">Ver todos →</button></div><div id="recentMatches" class="space-y-3"></div></div><div class="glass rounded-2xl p-5"><div class="flex justify-between items-center mb-4"><h3 class="font-bold text-lg">Últimas noticias</h3><button class="text-sm gold" onclick="setView('noticias')">Ver todas →</button></div><div id="recentNews" class="space-y-3"></div></div></div>
+</section>
+<section id="view-clasificacion" class="view hidden space-y-5">
+ <div><p class="gold text-xs tracking-[.2em] font-bold uppercase">La carrera por la copa</p><h2 class="text-3xl font-black mt-1">Clasificación</h2><p class="text-slate-400 mt-2">Tres puntos por victoria · Un punto por empate</p></div>
+ <div class="glass rounded-2xl p-4 md:p-5 space-y-4">
+  <h3 class="font-bold text-lg">📈 Evolución gráfica de puntos (Equipos de amigos)</h3>
+  <div id="evolutionChart" class="w-full h-48 bg-slate-950/40 rounded-xl p-3 flex items-end gap-2 overflow-x-auto border border-slate-800"></div>
+ </div>
+ <div class="glass rounded-2xl p-4 md:p-5"><div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4"><h3 class="font-bold">Tabla de la liga</h3><select id="standingsFilter" class="field md:max-w-xs" onchange="renderStandings()"><option value="all">Todos los equipos</option><option value="friends">Solo amigos</option></select></div><div class="table-wrap"><table><thead><tr><th>#</th><th>Equipo / entrenador</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>GF</th><th>GA</th><th>DG</th><th>Pts</th><th>Siguiente rival</th></tr></thead><tbody id="standingsBody"></tbody></table></div></div>
+</section>
+<section id="view-lideres" class="view hidden space-y-5"><div><p class="gold text-xs tracking-[.2em] font-bold uppercase">Rendimiento individual</p><h2 class="text-3xl font-black mt-1">Líderes del torneo</h2></div><div class="grid lg:grid-cols-3 gap-4"><div class="glass rounded-2xl p-5"><h3 class="font-bold text-lg mb-4">⚽ Máximos goleadores</h3><div id="topGoals" class="space-y-3"></div></div><div class="glass rounded-2xl p-5"><h3 class="font-bold text-lg mb-4">🎯 Máximos asistentes</h3><div id="topAssists" class="space-y-3"></div></div><div class="glass rounded-2xl p-5"><h3 class="font-bold text-lg mb-4">🟨 Disciplina</h3><div id="topCards" class="space-y-3"></div></div></div></section>
+<section id="view-partidos" class="view hidden space-y-5"><div><p class="gold text-xs tracking-[.2em] font-bold uppercase">Calendario y marcadores</p><h2 class="text-3xl font-black mt-1">Partidos</h2></div><div class="glass rounded-2xl p-5"><div class="flex items-center justify-between gap-3 mb-4"><h3 class="font-bold">Resultados registrados</h3><button class="btn btn-primary admin-only hidden" onclick="openMatchForm()">+ Añadir partido</button></div><div id="matchesList" class="grid md:grid-cols-2 gap-3"></div><p id="noMatches" class="text-slate-400 hidden">Todavía no hay partidos registrados.</p></div></section>
+<section id="view-h2h" class="view hidden space-y-5">
+ <div><p class="gold text-xs tracking-[.2em] font-bold uppercase">Enfrentamientos directos</p><h2 class="text-3xl font-black mt-1">Cara a Cara (H2H)</h2><p class="text-slate-400 mt-2">Compara el historial de duelos entre dos equipos del torneo.</p></div>
+ <div class="glass rounded-2xl p-5 md:p-7 max-w-3xl space-y-5">
+  <div class="grid sm:grid-cols-2 gap-4">
+   <div><label class="label">Equipo 1</label><select id="h2hTeam1" class="field" onchange="renderH2H()"></select></div>
+   <div><label class="label">Equipo 2</label><select id="h2hTeam2" class="field" onchange="renderH2H()"></select></div>
+  </div>
+  <div id="h2hResultContainer" class="pt-3"></div>
+ </div>
+</section>
+<section id="view-pronosticos" class="view hidden space-y-5">
+ <div><p class="gold text-xs tracking-[.2em] font-bold uppercase">Quiniela de amigos</p><h2 class="text-3xl font-black mt-1">Pronósticos de la jornada</h2><p class="text-slate-400 mt-2">Envía tu apuesta de resultados directamente por WhatsApp.</p></div>
+ <div class="glass rounded-2xl p-5 md:p-7 max-w-2xl">
+  <form id="predictionForm" class="space-y-4">
+   <div><label class="label">Tu nombre / Entrenador</label><input id="predName" class="field" required placeholder="Ej. Fede"></div>
+   <div class="grid sm:grid-cols-2 gap-3">
+    <div><label class="label">Equipo Local</label><select id="predHome" class="field"></select></div>
+    <div><label class="label">Equipo Visitante</label><select id="predAway" class="field"></select></div>
+   </div>
+   <div class="grid sm:grid-cols-2 gap-3">
+    <div><label class="label">Goles Pronosticados (Local)</label><input id="predHomeGoals" type="number" min="0" class="field" required placeholder="0"></div>
+    <div><label class="label">Goles Pronosticados (Visitante)</label><input id="predAwayGoals" type="number" min="0" class="field" required placeholder="0"></div>
+   </div>
+   <button class="btn btn-primary w-full" type="submit"><i data-lucide="send" class="inline w-4 h-4 mr-2"></i>Enviar pronóstico por WhatsApp</button>
+  </form>
+ </div>
+</section>
+<section id="view-noticias" class="view hidden space-y-5"><div><p class="gold text-xs tracking-[.2em] font-bold uppercase">Lo que se habla en los banquillos</p><h2 class="text-3xl font-black mt-1">Noticias y crónicas</h2></div><div class="flex justify-end"><button class="btn btn-primary admin-only hidden" onclick="openNewsForm()">+ Publicar noticia</button></div><div id="newsGrid" class="grid md:grid-cols-2 xl:grid-cols-3 gap-4"></div></section>
+<section id="view-mvp" class="view hidden space-y-5"><div><p class="gold text-xs tracking-[.2em] font-bold uppercase">Elige al mejor equipo</p><h2 class="text-3xl font-black mt-1">Votar mejor equipo de la semana</h2><p class="text-slate-400 mt-2">Tu voto abrirá WhatsApp con el mensaje preparado para el administrador.</p></div><div class="glass rounded-2xl p-5 md:p-7 max-w-2xl"><form id="mvpForm" class="space-y-4"><div><label class="label">Tu nombre / entrenador</label><input id="voterName" class="field" required placeholder="Ej. Rubén"></div><div><label class="label">Equipo MVP</label><select id="mvpTeam" class="field" required></select></div><div><label class="label">Motivo (opcional)</label><textarea id="mvpReason" class="field" rows="3" placeholder="¿Por qué merece el MVP?"></textarea></div><button class="btn btn-primary w-full" type="submit"><i data-lucide="message-circle" class="inline w-4 h-4 mr-2"></i>Enviar voto por WhatsApp</button><p id="waHint" class="smallmuted">El administrador debe configurar su número en Ajustes de Admin.</p></form></div></section>
+</main>
+<footer class="mt-12 pt-5 border-t border-white/10 flex flex-col md:flex-row justify-between gap-2 text-xs text-slate-500"><span>© Cañada Champions League · FC 27</span><span>Los datos se guardan en este navegador mediante localStorage.</span></footer>
+</div>
+<div id="modalRoot"></div><div id="toastRoot"></div>
+<script>
+const STORAGE_KEY='canadaChampionsFC27_v7';
+const LEGACY_STORAGE_KEY='canadaChampionsFC27_v6';
+const initialData={
+ teams:[
+  {"name":"Aston Villa","manager":"Iván","isHuman":true,"icon":"🎮","next":"Borussia Dortmund"},
+  {"name":"Real Madrid","manager":"Enrique","isHuman":true,"icon":"🎮","next":"LASK"},
+  {"name":"Arsenal","manager":"Marina y Rubén","isHuman":true,"icon":"🎮","next":"Real Betis"},
+  {"name":"Fenerbahçe","manager":"CPU","isHuman":false,"icon":"🤖","next":"Villarreal CF"},
+  {"name":"FC Barcelona","manager":"CPU","isHuman":false,"icon":"🤖","next":"Sporting CP"},
+  {"name":"Lombardia FC","manager":"CPU","isHuman":false,"icon":"🤖","next":"Liverpool"},
+  {"name":"AEK Athens","manager":"CPU","isHuman":false,"icon":"🤖","next":"AS Roma"},
+  {"name":"FC Bayern de Múnich","manager":"Aarón","isHuman":true,"icon":"🎮","next":"Manchester United"},
+  {"name":"PSG","manager":"CPU","isHuman":false,"icon":"🤖","next":"Como 1907"},
+  {"name":"RB Leipzig","manager":"CPU","isHuman":false,"icon":"🤖","next":"Shakhtar Donetsk"},
+  {"name":"AS Roma","manager":"CPU","isHuman":false,"icon":"🤖","next":"AEK Athens"},
+  {"name":"SSC Napoli","manager":"CPU","isHuman":false,"icon":"🤖","next":"Randers FC"},
+  {"name":"FK Bodø/Glimt","manager":"CPU","isHuman":false,"icon":"🤖","next":"Atlético de Madrid"},
+  {"name":"Sporting CP","manager":"Adrián","isHuman":true,"icon":"🎮","next":"FC Barcelona"},
+  {"name":"Manchester City","manager":"CPU","isHuman":false,"icon":"🤖","next":"Villarreal CF"},
+  {"name":"RC Lens","manager":"CPU","isHuman":false,"icon":"🤖","next":"Liverpool"},
+  {"name":"Liverpool","manager":"Pedro","isHuman":true,"icon":"🎮","next":"Lombardia FC"},
+  {"name":"FC Porto","manager":"CPU","isHuman":false,"icon":"🤖","next":"Slavia Praga"},
+  {"name":"VfB Stuttgart","manager":"CPU","isHuman":false,"icon":"🤖","next":"FC Porto"},
+  {"name":"PSV","manager":"CPU","isHuman":false,"icon":"🤖","next":"Viking FK"},
+  {"name":"LASK","manager":"CPU","isHuman":false,"icon":"🤖","next":"Real Madrid"},
+  {"name":"Manchester United","manager":"Fede","isHuman":true,"icon":"🎮","next":"FC Bayern de Múnich"},
+  {"name":"Villarreal CF","manager":"CPU","isHuman":false,"icon":"🤖","next":"Fenerbahçe"},
+  {"name":"Real Betis","manager":"CPU","isHuman":false,"icon":"🤖","next":"Arsenal"},
+  {"name":"Galatasaray","manager":"CPU","isHuman":false,"icon":"🤖","next":"Feyenoord"},
+  {"name":"LOSC","manager":"CPU","isHuman":false,"icon":"🤖","next":"Sporting CP"},
+  {"name":"Viking FK","manager":"CPU","isHuman":false,"icon":"🤖","next":"PSV"},
+  {"name":"Feyenoord","manager":"CPU","isHuman":false,"icon":"🤖","next":"Galatasaray"},
+  {"name":"Club Brujas","manager":"CPU","isHuman":false,"icon":"🤖","next":"AS Roma"},
+  {"name":"Randers FC","manager":"CPU","isHuman":false,"icon":"🤖","next":"SSC Napoli"},
+  {"name":"Como 1907","manager":"CPU","isHuman":false,"icon":"🤖","next":"PSG"},
+  {"name":"Atlético de Madrid","manager":"CPU","isHuman":false,"icon":"🤖","next":"FK Bodø/Glimt"},
+  {"name":"Borussia Dortmund","manager":"CPU","isHuman":false,"icon":"🤖","next":"Aston Villa"},
+  {"name":"PFC Ludogorets","manager":"CPU","isHuman":false,"icon":"🤖","next":"LOSC"},
+  {"name":"Shakhtar Donetsk","manager":"CPU","isHuman":false,"icon":"🤖","next":"RB Leipzig"},
+  {"name":"Slavia Praga","manager":"CPU","isHuman":false,"icon":"🤖","next":"FC Porto"}
+ ],
+ matches:[
+  {"home":"Aston Villa","away":"Slavia Praga","homeGoals":9,"awayGoals":1,"date":"Jornada 1"},
+  {"home":"Real Madrid","away":"Shakhtar Donetsk","homeGoals":7,"awayGoals":0,"date":"Jornada 1"},
+  {"home":"Arsenal","away":"Real Betis","homeGoals":4,"awayGoals":2,"date":"Jornada 1"},
+  {"home":"Fenerbahçe","away":"Viking FK","homeGoals":3,"awayGoals":1,"date":"Jornada 1"},
+  {"home":"FC Barcelona","away":"PFC Ludogorets","homeGoals":3,"awayGoals":1,"date":"Jornada 1"},
+  {"home":"Lombardia FC","away":"Borussia Dortmund","homeGoals":2,"awayGoals":0,"date":"Jornada 1"},
+  {"home":"AEK Athens","away":"Club Brujas","homeGoals":2,"awayGoals":0,"date":"Jornada 1"},
+  {"home":"FC Bayern de Múnich","away":"LOSC","homeGoals":3,"awayGoals":2,"date":"Jornada 1"},
+  {"home":"PSG","away":"Atlético de Madrid","homeGoals":3,"awayGoals":2,"date":"Jornada 1"},
+  {"home":"RB Leipzig","away":"Feyenoord","homeGoals":2,"awayGoals":1,"date":"Jornada 1"},
+  {"home":"AS Roma","away":"Galatasaray","homeGoals":2,"awayGoals":1,"date":"Jornada 1"},
+  {"home":"SSC Napoli","away":"Como 1907","homeGoals":2,"awayGoals":1,"date":"Jornada 1"},
+  {"home":"FK Bodø/Glimt","away":"Randers FC","homeGoals":1,"awayGoals":0,"date":"Jornada 1"},
+  {"home":"Sporting CP","away":"Manchester City","homeGoals":5,"awayGoals":5,"date":"Jornada 1"},
+  {"home":"RC Lens","away":"Liverpool","homeGoals":4,"awayGoals":4,"date":"Jornada 1"},
+  {"home":"FC Porto","away":"VfB Stuttgart","homeGoals":1,"awayGoals":1,"date":"Jornada 1"},
+  {"home":"PSV","away":"LASK","homeGoals":1,"awayGoals":1,"date":"Jornada 1"},
+  {"home":"Manchester United","away":"Villarreal CF","homeGoals":0,"awayGoals":0,"date":"Jornada 1"}
+ ],
+ players:[
+  {player:'Bukayo Saka',team:'Arsenal',goals:4,assists:2,yellow:0,red:0},
+  {player:'Kylian Mbappé',team:'Real Madrid',goals:4,assists:1,yellow:1,red:0},
+  {player:'Harry Kane',team:'FC Bayern de Múnich',goals:5,assists:0,yellow:0,red:0},
+  {player:'Ollie Watkins',team:'Aston Villa',goals:3,assists:2,yellow:1,red:0},
+  {player:'Viktor Gyökeres',team:'Sporting CP',goals:3,assists:1,yellow:0,red:0},
+  {player:'Mohamed Salah',team:'Liverpool',goals:2,assists:1,yellow:0,red:0},
+  {player:'Bruno Fernandes',team:'Manchester United',goals:1,assists:2,yellow:2,red:0},
+  {player:'Johan Manzambi',team:'Aston Villa',goals:6,assists:0,yellow:0,red:0},
+  {player:'Odsonne Édouard',team:'RC Lens',goals:4,assists:0,yellow:0,red:0},
+  {player:'Michael Olise',team:'FC Bayern de Múnich',goals:0,assists:3,yellow:0,red:0},
+  {player:'Abdallah Sima',team:'RC Lens',goals:0,assists:3,yellow:0,red:0},
+  {player:'Alejandro Garnacho',team:'Aston Villa',goals:0,assists:3,yellow:0,red:0},
+  {player:'MARLON',team:'Shakhtar Donetsk',goals:0,assists:0,yellow:1,red:0}
+ ],
+ news:[
+  {id:1,title:'¡Arranca la Cañada Champions League con la máxima tensión!',category:'Crónica',date:'25 Oct 2026',image:'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80',content:'Se ha presentado oficialmente el torneo con los managers listos para disputar la gloria europea en el FC 27. Marina y Rubén avisan que su Arsenal va a por el doblete, mientras Enrique promete dar cátedra con el Real Madrid.'},
+  {id:2,title:'Polémica en el derbi: Fede critica la táctica de Aarón',category:'Polémica',date:'24 Oct 2026',image:'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80',content:'Tras la ajustada victoria del Bayern de Múnich, los banquillos saltaron tras varias jugadas controvertidas en los minutos finales. El ambiente para la próxima jornada promete estar al rojo vivo.'}
+ ],whatsappNum:'',adminPin:'1234'
+};
+let data,admin=false;
+function clone(x){return JSON.parse(JSON.stringify(x))}
+
+function recalculateAllTeams(){
+ data.teams.forEach(t=>{
+  t.pj=0; t.pg=0; t.pe=0; t.pp=0; t.gf=0; t.gc=0; t.pts=0;
+ });
+ data.matches.forEach(m=>{
+  let h=data.teams.find(t=>t.name===m.home);
+  let a=data.teams.find(t=>t.name===m.away);
+  if(!h || !a) return;
+  let hg=+m.homeGoals||0;
+  let ag=+m.awayGoals||0;
+  h.pj++; a.pj++;
+  h.gf+=hg; h.gc+=ag;
+  a.gf+=ag; a.gc+=hg;
+  if(hg>ag){ h.pg++; h.pts+=3; a.pp++; }
+  else if(hg<ag){ a.pg++; a.pts+=3; h.pp++; }
+  else { h.pe++; a.pe++; h.pts++; a.pts++; }
+ });
+}
+
+function load(){try{
+ const saved=localStorage.getItem(STORAGE_KEY);
+ const legacy=saved?null:localStorage.getItem(LEGACY_STORAGE_KEY);
+ const raw=saved||legacy;
+ if(raw){
+  const parsed=JSON.parse(raw);
+  data={...clone(initialData),...parsed};
+  if(!Array.isArray(parsed.teams)||parsed.teams.length===0)data.teams=clone(initialData.teams);
+  data.news=Array.isArray(parsed.news)?parsed.news:clone(initialData.news);
+  data.players=Array.isArray(parsed.players)?parsed.players:clone(initialData.players);
+  data.matches=Array.isArray(parsed.matches)?parsed.matches:clone(initialData.matches);
+  data.whatsappNum=parsed.whatsappNum||'';
+  data.adminPin=parsed.adminPin||'1234';
+ }else data=clone(initialData);
+ }catch(e){data=clone(initialData)}
+ recalculateAllTeams();
+ save();
+}
+
+function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(data))}
+function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function toast(msg){document.getElementById('toastRoot').innerHTML=`<div class="toast">${esc(msg)}</div>`;setTimeout(()=>document.getElementById('toastRoot').innerHTML='',2800)}
+function refreshIcons(){if(window.lucide)lucide.createIcons()}
+function setView(v){document.querySelectorAll('.view').forEach(x=>x.classList.add('hidden'));document.getElementById('view-'+v).classList.remove('hidden');document.querySelectorAll('.navbtn').forEach(x=>x.classList.toggle('active',x.dataset.view===v));window.scrollTo({top:0,behavior:'smooth'});if(v==='clasificacion'){renderStandings();renderChart();}if(v==='h2h')initH2H();if(v==='pronosticos')initPronosticos();refreshIcons()}
+document.querySelectorAll('.navbtn').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+function sortedTeams(arr=data.teams){return [...arr].sort((a,b)=>b.pts-a.pts||(b.gf-b.gc)-(a.gf-a.gc)||b.gf-a.gf||data.teams.indexOf(a)-data.teams.indexOf(b))}
+function renderHome(){let played=data.matches.length;let goals=data.matches.reduce((s,m)=>s+(+m.homeGoals||0)+(+m.awayGoals||0),0);document.getElementById('homeStats').innerHTML=[['TROFEO','Temporada 26/27','trophy'],['EQUIPOS',data.teams.length,'shield'],['PARTIDOS',played,'calendar-days'],['GOLES',goals,'goal']].map(([label,val,icon])=>`<div class="glass rounded-2xl p-4"><div class="flex justify-between text-xs text-slate-400 uppercase tracking-wider"><span>${label}</span><i data-lucide="${icon}" class="w-4 h-4 gold"></i></div><div class="statnum mt-2">${val}</div></div>`).join('');
+ document.getElementById('teamsGrid').innerHTML=data.teams.filter(t=>t.isHuman).map((t)=>`<div class="glass rounded-2xl p-4 flex items-center gap-3"><div class="team-icon">${t.icon||'🎮'}</div><div class="min-w-0 flex-1"><div class="font-bold truncate">${esc(t.name)}</div><div class="text-sm text-slate-400 truncate">${esc(t.manager)}</div></div><span class="badge">${t.isHuman?'AMIGO':'CPU'}</span></div>`).join('');
+ document.getElementById('recentMatches').innerHTML=data.matches.slice(-3).reverse().map(matchCard).join('')||'<p class="smallmuted">Todavía no hay resultados.</p>';
+ document.getElementById('recentNews').innerHTML=data.news.slice(0,3).map(n=>`<div class="flex gap-3 items-center cursor-pointer hover:bg-slate-900/40 p-2 rounded-xl transition" onclick="openNewsDetail(${n.id})"><div class="w-14 h-14 rounded-xl overflow-hidden shrink-0 bg-slate-800">${n.image?`<img class="w-full h-full object-contain bg-black/40" src="${esc(n.image)}" alt="">`:'📰'}</div><div class="min-w-0"><span class="gold text-xs">${esc(n.category)}</span><p class="font-semibold text-sm truncate">${esc(n.title)}</p><p class="text-xs text-slate-500">${esc(n.date)}</p></div></div>`).join('')||'<p class="smallmuted">No hay noticias publicadas.</p>';
+}
+function renderStandings(){let filter=document.getElementById('standingsFilter')?.value||'all';let teams=sortedTeams(data.teams.filter(t=>filter==='all'||t.isHuman));document.getElementById('standingsBody').innerHTML=teams.map((t,i)=>`<tr><td class="gold font-black">${String(i+1).padStart(2,'0')}</td><td><div class="font-bold">${esc(t.name)}</div><div class="text-xs text-slate-400">${t.icon||'🎮'} ${esc(t.manager)}</div></td><td>${t.pj}</td><td>${t.pg}</td><td>${t.pe}</td><td>${t.pp}</td><td>${t.gf}</td><td>${t.gc}</td><td class="${t.gf-t.gc>=0?'text-emerald-300':'text-red-300'}">${t.gf-t.gc>0?'+':''}${t.gf-t.gc}</td><td class="font-black gold">${t.pts}</td><td>${esc(t.next||'—')}</td></tr>`).join('')}
+
+/* GRÁFICO DE EVOLUCIÓN SVG */
+function renderChart(){
+ const container=document.getElementById('evolutionChart');
+ const humanTeams=data.teams.filter(t=>t.isHuman);
+ if(!humanTeams.length){container.innerHTML='<p class="smallmuted">No hay equipos de amigos para mostrar.</p>';return;}
+ let html=`<div class="text-xs text-slate-400 mb-2">Simulación de progresión por partidos registrados</div><div class="flex gap-4 text-xs flex-wrap">`;
+ humanTeams.forEach((t,i)=>{
+  let colors=['#eab308','#38bdf8','#4ade80','#f472b6','#c084fc','#fb923c','#818cf8'];
+  let c=colors[i%colors.length];
+  html+=`<div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full inline-block" style="background:${c}"></span><span>${esc(t.name)} (${t.pts} pts)</span></div>`;
+ });
+ html+=`</div>`;
+ container.innerHTML=html;
+}
+
+/* H2H (CARA A CARA) */
+function initH2H(){
+ let opts=data.teams.map(t=>`<option value="${esc(t.name)}">${esc(t.name)}</option>`).join('');
+ let s1=document.getElementById('h2hTeam1'), s2=document.getElementById('h2hTeam2');
+ s1.innerHTML=opts; s2.innerHTML=opts;
+ if(data.teams.length>1) s2.selectedIndex=1;
+ renderH2H();
+}
+function renderH2H(){
+ let t1=document.getElementById('h2hTeam1').value;
+ let t2=document.getElementById('h2hTeam2').value;
+ let container=document.getElementById('h2hResultContainer');
+ if(t1===t2){container.innerHTML=`<p class="text-xs text-red-400">Selecciona dos equipos diferentes para comparar.</p>`;return;}
+ let duels=data.matches.filter(m=>(m.home===t1&&m.away===t2)||(m.home===t2&&m.away===t1));
+ let wins1=0, wins2=0, draws=0, gf1=0, gf2=0;
+ duels.forEach(m=>{
+  let isH1=(m.home===t1);
+  let g1=isH1? +m.homeGoals:+m.awayGoals;
+  let g2=isH1? +m.awayGoals:+m.homeGoals;
+  gf1+=g1; gf2+=g2;
+  if(g1>g2) wins1++;
+  else if(g2>g1) wins2++;
+  else draws++;
+ });
+ let html=`<div class="grid grid-cols-3 text-center p-4 bg-slate-950/60 rounded-xl border border-slate-800 items-center"><div><div class="font-black text-lg gold">${t1}</div><div class="text-2xl font-black mt-1">${wins1} Victorias</div><div class="text-xs text-slate-400">Goles: ${gf1}</div></div><div class="text-xs text-slate-500 font-bold uppercase"><div>${duels.length} duelos</div><div class="text-amber-400 mt-1">${draws} Empates</div></div><div><div class="font-black text-lg gold">${t2}</div><div class="text-2xl font-black mt-1">${wins2} Victorias</div><div class="text-xs text-slate-400">Goles: ${gf2}</div></div></div><div class="space-y-2 mt-4"><h4 class="font-bold text-sm text-slate-300">Historial de partidos:</h4>`;
+ if(!duels.length) html+=`<p class="smallmuted">No hay enfrentamientos registrados entre estos dos equipos todavía.</p>`;
+ else duels.forEach(m=>{ html+=matchCard(m); });
+ html+=`</div>`;
+ container.innerHTML=html;
+}
+
+/* PRONÓSTICOS / QUINIELA */
+function initPronosticos(){
+ let opts=data.teams.map(t=>`<option value="${esc(t.name)}">${esc(t.name)}</option>`).join('');
+ document.getElementById('predHome').innerHTML=opts;
+ document.getElementById('predAway').innerHTML=opts;
+ if(data.teams.length>1) document.getElementById('predAway').selectedIndex=1;
+}
+document.getElementById('predictionForm')?.addEventListener('submit',e=>{
+ e.preventDefault();
+ if(!data.whatsappNum){toast('El administrador aún no ha configurado el número de WhatsApp');return;}
+ let name=document.getElementById('predName').value.trim();
+ let home=document.getElementById('predHome').value;
+ let away=document.getElementById('predAway').value;
+ if(home===away){toast('Elige dos equipos distintos para el pronóstico');return;}
+ let hg=document.getElementById('predHomeGoals').value;
+ let ag=document.getElementById('predAwayGoals').value;
+ let msg=`🔮 PRONÓSTICO QUINIELA · Cañada Champions League%0A👤 Participante: ${name}%0A⚽ Partido: ${home} vs ${away}%0A🎯 Pronóstico: ${hg} - ${ag}`;
+ window.open(`https://wa.me/${data.whatsappNum}?text=${encodeURIComponent(msg.replaceAll('%0A','\n'))}`,'_blank','noopener');
+ toast('¡Pronóstico preparado para enviar por WhatsApp!');
+});
+
+function matchCard(m){return `<div class="bg-slate-950/50 border border-slate-700/70 rounded-xl p-4"><div class="text-xs text-slate-500 mb-3">${esc(m.date||'Partido')}</div><div class="grid grid-cols-[1fr_auto_1fr] items-center gap-2"><div class="font-semibold text-sm">${esc(m.home)}</div><div class="text-xl font-black gold whitespace-nowrap">${m.homeGoals} : ${m.awayGoals}</div><div class="font-semibold text-sm text-right">${esc(m.away)}</div></div></div>`}
+function renderMatches(){document.getElementById('matchesList').innerHTML=data.matches.map((m,i)=>`${matchCard(m)}${admin?`<div class="flex justify-end -mt-2 mb-2"><button class="text-xs text-red-300" onclick="deleteMatch(${i})">Eliminar partido</button></div>`:''}`).join('');document.getElementById('noMatches').classList.toggle('hidden',data.matches.length>0)}
+
+/* RENDER DE TABLAS DE LÍDERES FILTRANDO SOLAMENTE LOS QUE TIENEN > 0 */
+function rankList(list,valueKey,format){
+ if(!list.length)return '<p class="smallmuted">No hay futbolistas registrados en esta categoría.</p>';
+ return list.slice(0,8).map((p,i)=>`<div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg ${i===0?'bg-yellow-500/20 gold':'bg-slate-800 text-slate-300'} grid place-items-center font-bold">${i+1}</div><div class="min-w-0 flex-1"><p class="font-semibold truncate">${esc(p.player)}</p><p class="text-xs text-slate-400 truncate">${esc(p.team)}</p></div><span class="font-black gold">${format(p[valueKey],p)}</span></div>`).join('')
+}
+
+function renderLeaders(){
+ let scorers = [...data.players].filter(p => (p.goals || 0) > 0).sort((a,b) => b.goals - a.goals);
+ let assisters = [...data.players].filter(p => (p.assists || 0) > 0).sort((a,b) => b.assists - a.assists);
+ let disciplined = [...data.players].filter(p => ((p.yellow || 0) + (p.red || 0)) > 0).sort((a,b) => (b.yellow + 2*b.red) - (a.yellow + 2*a.red));
+
+ document.getElementById('topGoals').innerHTML = rankList(scorers, 'goals', v => `${v} ⚽`);
+ document.getElementById('topAssists').innerHTML = rankList(assisters, 'assists', v => `${v} 🎯`);
+ document.getElementById('topCards').innerHTML = rankList(disciplined, 'yellow', (v,p) => `${p.yellow||0} 🟨 · ${p.red||0} 🟥`);
+}
+
+function renderNews(){
+ document.getElementById('newsGrid').innerHTML=data.news.map(n=>`
+  <article class="glass rounded-2xl overflow-hidden flex flex-col">
+   ${n.image?`<img class="news-img" src="${esc(n.image)}" alt="" onclick="openNewsDetail(${n.id})" onerror="this.style.display='none'">`:`<div class="news-img grid place-items-center text-4xl cursor-pointer" onclick="openNewsDetail(${n.id})">📰</div>`}
+   <div class="p-5 flex flex-col flex-1">
+    <div class="flex justify-between gap-2"><span class="badge gold">${esc(n.category)}</span><span class="text-xs text-slate-500">${esc(n.date)}</span></div>
+    <h3 class="font-bold text-lg mt-3 cursor-pointer hover:text-amber-400 transition" onclick="openNewsDetail(${n.id})">${esc(n.title)}</h3>
+    <p class="text-sm text-slate-300 mt-2 flex-1 line-clamp-3">${esc(n.content)}</p>
+    <div class="flex items-center justify-between mt-4 pt-3 border-t border-white/10">
+     <button class="btn text-xs" onclick="openNewsDetail(${n.id})">Leer completa →</button>
+     <button class="btn text-xs flex items-center gap-1 text-amber-400" onclick="shareNews(${n.id})"><i data-lucide="share-2" class="w-3.5 h-3.5"></i> Compartir</button>
+    </div>
+   </div>
+  </article>`).join('')||'<p class="smallmuted">Todavía no hay noticias.</p>';
+}
+
+function openNewsDetail(id){
+ let n=data.news.find(x=>x.id===id);
+ if(!n)return;
+ modal(`
+  <div class="space-y-4">
+   <div class="flex justify-between items-start gap-3"><span class="badge gold">${esc(n.category)}</span><span class="text-xs text-slate-400">${esc(n.date)}</span></div>
+   <h2 class="text-2xl font-black text-amber-400">${esc(n.title)}</h2>
+   ${n.image?`<div class="w-full max-h-96 bg-black/50 rounded-xl border border-slate-700 flex items-center justify-center overflow-hidden p-2"><img src="${esc(n.image)}" class="max-h-80 w-auto object-contain" alt=""></div>`:''}
+   <div class="text-slate-200 text-base leading-relaxed whitespace-pre-line pt-2">${esc(n.content)}</div>
+   <div class="flex gap-3 pt-4 border-t border-white/10">
+    <button class="btn btn-primary flex-1 flex items-center justify-center gap-2" onclick="shareNews(${n.id})"><i data-lucide="share-2" class="w-4 h-4"></i> Compartir por WhatsApp</button>
+    <button class="btn" onclick="closeModal()">Cerrar</button>
+   </div>
+  </div>`);
+}
+
+function shareNews(id){
+ let n=data.news.find(x=>x.id===id);
+ if(!n)return;
+ let msg=`📰 ¡Mira esta noticia de la Cañada Champions League!%0A%0A*${n.title}* (${n.category})%0A📅 ${n.date}%0A%0A${n.content.substring(0, 120)}...`;
+ if(data.whatsappNum){
+  window.open(`https://wa.me/${data.whatsappNum}?text=${encodeURIComponent(msg.replaceAll('%0A','\n'))}`,'_blank','noopener');
+ }else{
+  // Si no hay whatsapp de admin configurado, abre WhatsApp libre para compartir con cualquier chat
+  window.open(`https://wa.me/?text=${encodeURIComponent(msg.replaceAll('%0A','\n'))}`,'_blank','noopener');
+ }
+ toast('Enlace de noticia preparado para compartir');
+}
+
+function renderMvp(){let s=document.getElementById('mvpTeam');s.innerHTML='<option value="">Selecciona un equipo…</option>'+sortedTeams().map(t=>`<option value="${esc(t.name)}">${esc(t.name)}</option>`).join('');document.getElementById('waHint').textContent=data.whatsappNum?'Se abrirá WhatsApp al número configurado.':'El administrador debe configurar su número en Ajustes de Admin.'}
+function renderAll(){recalculateAllTeams();renderHome();renderStandings();renderLeaders();renderMatches();renderNews();renderMvp();document.querySelectorAll('.admin-only').forEach(e=>e.classList.toggle('hidden',!admin));refreshIcons()}
+function modal(content){document.getElementById('modalRoot').innerHTML=`<div class="modal-bg" onclick="if(event.target===this)closeModal()"><div class="modal glass rounded-2xl p-5 md:p-6"><div class="flex items-center justify-between mb-5"><h2 class="text-xl font-bold">Panel de administración</h2><button class="btn" onclick="closeModal()">✕</button></div>${content}</div></div>`;refreshIcons()}
+function closeModal(){document.getElementById('modalRoot').innerHTML=''}
+function openAdmin(){if(admin){adminMenu();return}modal(`<form onsubmit="loginAdmin(event)" class="space-y-4"><p class="text-slate-300 text-sm">Introduce el PIN para administrar el torneo.</p><div><label class="label">PIN de administrador</label><input class="field" id="adminPinInput" type="password" inputmode="numeric" placeholder="••••" required autofocus></div><button class="btn btn-primary w-full">Entrar</button><p class="text-xs text-slate-500">PIN inicial: 1234. Puedes cambiarlo en Ajustes.</p></form>`)}
+function loginAdmin(e){e.preventDefault();if(document.getElementById('adminPinInput').value!==String(data.adminPin||'1234')){toast('PIN incorrecto');return}admin=true;closeModal();renderAll();adminMenu()}
+function adminMenu(){modal(`<p class="text-slate-300 text-sm mb-4">Sesión de administración activa. Los cambios se guardan automáticamente en este navegador.</p><div class="grid sm:grid-cols-2 gap-3"><button class="btn btn-primary" onclick="closeModal();openMatchForm()">+ Registrar partido</button><button class="btn btn-primary" onclick="closeModal();openLeadersManager()">🏆 Gestionar Líderes por Categoría</button><button class="btn btn-primary" onclick="closeModal();openTeamsEditor()">Editar equipos y clasificación</button><button class="btn btn-primary" onclick="closeModal();openNewsForm()">+ Publicar noticia</button><button class="btn btn-primary" onclick="openNewsManager()">🗑 Gestionar / Editar noticias</button><button class="btn" onclick="closeModal();openSettings()">Ajustes y seguridad</button><button class="btn btn-danger sm:col-span-2" onclick="logoutAdmin()">Cerrar sesión admin</button></div>`)}
+function logoutAdmin(){admin=false;closeModal();renderAll();toast('Sesión de administración cerrada')}
+function teamOptions(selected=''){return data.teams.map(t=>`<option ${t.name===selected?'selected':''} value="${esc(t.name)}">${esc(t.name)}</option>`).join('')}
+
+/* GESTIÓN DE LÍDERES POR SECCIONES (GOLEADORES, ASISTENTES, DISCIPLINA) */
+function openLeadersManager(tab='goals'){
+ let filteredList = [];
+ if(tab==='goals') {
+  filteredList = data.players.map((p, origIdx) => ({p, origIdx})).filter(x => (x.p.goals || 0) > 0).sort((a,b) => b.p.goals - a.p.goals);
+ } else if(tab==='assists') {
+  filteredList = data.players.map((p, origIdx) => ({p, origIdx})).filter(x => (x.p.assists || 0) > 0).sort((a,b) => b.p.assists - a.p.assists);
+ } else {
+  filteredList = data.players.map((p, origIdx) => ({p, origIdx})).filter(x => ((x.p.yellow || 0) + (x.p.red || 0)) > 0).sort((a,b) => (b.p.yellow + 2*b.p.red) - (a.p.yellow + 2*a.p.red));
+ }
+
+ let itemsHtml = filteredList.map(({p, origIdx}) => {
+  if(tab==='goals') {
+   return `<div class="glass rounded-xl p-3 flex items-center justify-between gap-2"><div class="flex-1 min-w-0"><div class="font-semibold truncate">${esc(p.player)} <span class="text-xs text-slate-400">(${esc(p.team)})</span></div></div><div class="flex items-center gap-2"><input class="field w-20 text-center" type="number" min="0" id="g_${origIdx}" value="${p.goals||0}"><button type="button" class="btn btn-danger text-xs" onclick="removePlayer(${origIdx}, '${tab}')">✕</button></div></div>`;
+  } else if(tab==='assists') {
+   return `<div class="glass rounded-xl p-3 flex items-center justify-between gap-2"><div class="flex-1 min-w-0"><div class="font-semibold truncate">${esc(p.player)} <span class="text-xs text-slate-400">(${esc(p.team)})</span></div></div><div class="flex items-center gap-2"><input class="field w-20 text-center" type="number" min="0" id="a_${origIdx}" value="${p.assists||0}"><button type="button" class="btn btn-danger text-xs" onclick="removePlayer(${origIdx}, '${tab}')">✕</button></div></div>`;
+  } else {
+   return `<div class="glass rounded-xl p-3 flex items-center justify-between gap-2"><div class="flex-1 min-w-0"><div class="font-semibold truncate">${esc(p.player)} <span class="text-xs text-slate-400">(${esc(p.team)})</span></div></div><div class="flex items-center gap-1"><span class="text-xs text-slate-400">🟨</span><input class="field w-16 text-center" type="number" min="0" id="y_${origIdx}" value="${p.yellow||0}"><span class="text-xs text-slate-400 ml-1">🟥</span><input class="field w-16 text-center" type="number" min="0" id="r_${origIdx}" value="${p.red||0}"><button type="button" class="btn btn-danger text-xs ml-2" onclick="removePlayer(${origIdx}, '${tab}')">✕</button></div></div>`;
+  }
+ }).join('');
+
+ modal(`<div class="space-y-4"><h3 class="font-bold gold text-lg">Gestión de Líderes por Categoría</h3><div class="flex gap-2 border-b border-white/10 pb-2"><button type="button" class="btn ${tab==='goals'?'btn-primary':''}" onclick="openLeadersManager('goals')">⚽ Goleadores</button><button type="button" class="btn ${tab==='assists'?'btn-primary':''}" onclick="openLeadersManager('assists')">🎯 Asistencias</button><button type="button" class="btn ${tab==='cards'?'btn-primary':''}" onclick="openLeadersManager('cards')">🟨 Disciplina</button><button type="button" class="btn" onclick="addNewPlayerModal('${tab}')">+ Añadir Jugador</button></div><form onsubmit="saveLeadersTab(event, '${tab}')" class="space-y-3"><div class="max-h-[50vh] overflow-auto pr-1 space-y-2">${itemsHtml || '<p class="smallmuted py-4 text-center">No hay jugadores con estadísticas registradas en esta categoría.</p>'}</div><button class="btn btn-primary w-full mt-2">Guardar cambios de esta categoría</button></form></div>`);
+}
+
+function saveLeadersTab(e, tab){
+ e.preventDefault();
+ data.players.forEach((p, origIdx)=>{
+  if(tab==='goals'){
+   let el=document.getElementById(`g_${origIdx}`);
+   if(el) p.goals=Math.max(0,Number(el.value)||0);
+  }else if(tab==='assists'){
+   let el=document.getElementById(`a_${origIdx}`);
+   if(el) p.assists=Math.max(0,Number(el.value)||0);
+  }else if(tab==='cards'){
+   let elY=document.getElementById(`y_${origIdx}`);
+   let elR=document.getElementById(`r_${origIdx}`);
+   if(elY) p.yellow=Math.max(0,Number(elY.value)||0);
+   if(elR) p.red=Math.max(0,Number(elR.value)||0);
+  }
+ });
+ save(); closeModal(); renderAll(); toast('Categoría de líderes actualizada');
+}
+
+function addNewPlayerModal(defaultTab='goals'){
+ modal(`<form onsubmit="createPlayer(event, '${defaultTab}')" class="space-y-4"><h3 class="font-bold gold">Añadir nuevo jugador</h3><div><label class="label">Nombre del futbolista</label><input id="newPName" class="field" required placeholder="Ej. Lamine Yamal"></div><div><label class="label">Equipo</label><select id="newPTeam" class="field">${teamOptions()}</select></div><div class="grid grid-cols-2 sm:grid-cols-4 gap-2"><div><label class="label">⚽ Goles</label><input id="newPGoals" type="number" min="0" class="field" value="${defaultTab==='goals'?1:0}"></div><div><label class="label">🎯 Asistencias</label><input id="newPAssists" type="number" min="0" class="field" value="${defaultTab==='assists'?1:0}"></div><div><label class="label">🟨 Amarillas</label><input id="newPYellow" type="number" min="0" class="field" value="${defaultTab==='cards'?1:0}"></div><div><label class="label">🟥 Rojas</label><input id="newPRed" type="number" min="0" class="field" value="0"></div></div><button class="btn btn-primary w-full">Crear jugador</button></form>`);
+}
+
+function createPlayer(e, defaultTab='goals'){
+ e.preventDefault();
+ data.players.push({
+  player: document.getElementById('newPName').value.trim(),
+  team: document.getElementById('newPTeam').value,
+  goals: Number(document.getElementById('newPGoals').value)||0,
+  assists: Number(document.getElementById('newPAssists').value)||0,
+  yellow: Number(document.getElementById('newPYellow').value)||0,
+  red: Number(document.getElementById('newPRed').value)||0
+ });
+ save(); openLeadersManager(defaultTab); toast('Jugador añadido');
+}
+
+function removePlayer(idx, tab='goals'){
+ if(!confirm('¿Eliminar totalmente a este jugador de las listas?')) return;
+ data.players.splice(idx,1);
+ save(); openLeadersManager(tab); toast('Jugador eliminado');
+}
+
+/* NOTICIAS */
+function openNewsForm(newsId=null){
+ let n={title:'',category:'Crónica',date:new Date().toLocaleDateString('es-ES',{day:'2-digit',month:'short',year:'numeric'}),image:'',content:''};
+ if(newsId!==null){let found=data.news.find(x=>x.id===newsId);if(found)n=found;}
+ modal(`<form onsubmit="saveNews(event, ${newsId})" class="space-y-4"><h3 class="font-bold gold">${newsId!==null?'Editar noticia':'Publicar noticia'}</h3><div><label class="label">Título</label><input id="newsTitle" class="field" value="${esc(n.title)}" required></div><div class="grid sm:grid-cols-2 gap-3"><div><label class="label">Categoría</label><select id="newsCategory" class="field"><option ${n.category==='Crónica'?'selected':''}>Crónica</option><option ${n.category==='Previa'?'selected':''}>Previa</option><option ${n.category==='Polémica'?'selected':''}>Polémica</option><option ${n.category==='Mercado'?'selected':''}>Mercado</option><option ${n.category==='Comunicado'?'selected':''}>Comunicado</option></select></div><div><label class="label">Fecha</label><input id="newsDate" class="field" value="${esc(n.date)}"></div></div><div class="space-y-2"><div><label class="label">Subir imagen desde el dispositivo</label><input type="file" id="newsFileInput" accept="image/*" class="field text-xs cursor-pointer" onchange="handleNewsFile(event)"></div><div class="text-center text-xs text-slate-500 font-bold">- O UTILIZA UNA URL -</div><div><label class="label">URL de imagen de internet</label><input id="newsImage" class="field" type="url" placeholder="https://…" value="${esc(n.image)}" oninput="updateNewsPreview(this.value)"></div></div><div id="newsPreviewContainer" class="${n.image?'':'hidden'}"><label class="label">Vista previa:</label><img id="newsPreviewImg" src="${esc(n.image)}" class="w-full h-36 object-contain bg-black/40 rounded-xl border border-slate-700"></div><div><label class="label">Texto de la noticia</label><textarea id="newsContent" class="field" rows="4" required>${esc(n.content)}</textarea></div><button class="btn btn-primary w-full">${newsId!==null?'Guardar cambios':'Publicar noticia'}</button></form>`)
+}
+function handleNewsFile(e){const file=e.target.files[0];if(file){const reader=new FileReader();reader.onload=function(event){const base64=event.target.result;document.getElementById('newsImage').value=base64;updateNewsPreview(base64)};reader.readAsDataURL(file)}}
+function updateNewsPreview(url){const container=document.getElementById('newsPreviewContainer');const img=document.getElementById('newsPreviewImg');if(url&&url.trim()){img.src=url;container.classList.remove('hidden')}else{container.classList.add('hidden')}}
+function saveNews(e, newsId){
+ e.preventDefault();
+ let title=document.getElementById('newsTitle').value.trim();
+ let category=document.getElementById('newsCategory').value;
+ let date=document.getElementById('newsDate').value;
+ let image=document.getElementById('newsImage').value.trim();
+ let content=document.getElementById('newsContent').value.trim();
+ if(newsId!==null){
+  let item=data.news.find(x=>x.id===newsId);
+  if(item){item.title=title;item.category=category;item.date=date;item.image=image;item.content=content;}
+  toast('Noticia actualizada');
+ }else{
+  data.news.unshift({id:Date.now(),title,category,date,image,content});
+  toast('Noticia publicada');
+ }
+ save();closeModal();renderAll();
+}
+function openNewsManager(){modal(`<div class="space-y-4"><h3 class="font-bold gold">Gestionar noticias publicadas</h3><p class="text-sm text-slate-400">Edita o elimina cualquier noticia existente.</p><div class="space-y-3 max-h-[55vh] overflow-auto pr-1">${data.news.map(n=>`<div class="glass rounded-xl p-3 flex items-center justify-between gap-3"><div class="flex-1 min-w-0"><p class="font-semibold truncate">${esc(n.title)}</p><p class="text-xs text-slate-400">${esc(n.category)} · ${esc(n.date)}</p></div><div class="flex gap-2 shrink-0"><button type="button" class="btn text-xs" onclick="openNewsForm(${n.id})">Editar</button><button type="button" class="btn btn-danger text-xs" onclick="deleteNews(${n.id});openNewsManager()">Eliminar</button></div></div>`).join('')||'<p class="smallmuted">No hay noticias publicadas.</p>'}</div><button class="btn w-full mt-2" onclick="adminMenu()">Volver al panel</button></div>`)}
+function deleteNews(id){if(!confirm('¿Eliminar esta noticia?'))return;data.news=data.news.filter(n=>n.id!==id);save();renderAll();toast('Noticia eliminada')}
+
+/* GESTIÓN EQUIPOS Y PARTIDOS */
+function openTeamsEditor(){
+ const rows=data.teams.map((t,i)=>`<div class="glass rounded-xl p-3 space-y-3"><div class="flex justify-between items-center"><strong>${i+1}. ${esc(t.name)}</strong><button type="button" class="btn btn-danger text-xs" onclick="removeTeam(${i})">Eliminar equipo</button></div><div class="grid sm:grid-cols-2 gap-2"><div><label class="label">Nombre del equipo</label><input class="field" id="tn${i}" value="${esc(t.name)}" required></div><div><label class="label">Entrenador / CPU</label><input class="field" id="tm${i}" value="${esc(t.manager)}"></div><div><label class="label">Icono</label><input class="field" id="ti${i}" value="${esc(t.icon||'🎮')}"></div><div><label class="label">Siguiente rival</label><input class="field" id="tnext${i}" value="${esc(t.next||'')}" placeholder="Rival próximo"></div><div><label class="label">Tipo de equipo</label><select class="field" id="th${i}"><option value="true" ${t.isHuman?'selected':''}>Amigo</option><option value="false" ${!t.isHuman?'selected':''}>CPU</option></select></div></div></div>`).join('');
+ modal(`<form onsubmit="saveTeamsEditor(event)" class="space-y-4"><h3 class="font-bold gold">Editar equipos</h3><p class="text-sm text-slate-400">Puede modificar el nombre, entrenador, tipo y siguiente rival de los equipos. La clasificación se calcula automáticamente a partir de los partidos.</p><div class="flex gap-2"><button type="button" class="btn" onclick="addTeamPrompt()">+ Añadir equipo</button></div><div class="space-y-3 max-h-[55vh] overflow-auto pr-1">${rows}</div><button class="btn btn-primary w-full">Guardar todos los cambios</button></form>`)
+}
+function saveTeamsEditor(e){e.preventDefault();data.teams.forEach((t,i)=>{t.name=document.getElementById('tn'+i).value.trim();t.manager=document.getElementById('tm'+i).value.trim();t.icon=document.getElementById('ti'+i).value.trim()||'🎮';t.next=document.getElementById('tnext'+i).value.trim();t.isHuman=document.getElementById('th'+i).value==='true';});recalculateAllTeams();save();closeModal();renderAll();toast('Equipos actualizados')}
+function addTeamPrompt(){let name=prompt('Nombre del nuevo equipo:');if(!name||!name.trim())return;data.teams.push({name:name.trim(),manager:'CPU',isHuman:false,icon:'🤖',next:''});recalculateAllTeams();save();openTeamsEditor()}
+function removeTeam(i){if(!confirm('¿Eliminar este equipo?'))return;let name=data.teams[i].name;data.teams.splice(i,1);data.matches=data.matches.filter(m=>m.home!==name&&m.away!==name);data.players=data.players.filter(p=>p.team!==name);recalculateAllTeams();save();openTeamsEditor()}
+function openMatchForm(){modal(`<form onsubmit="addMatch(event)" class="space-y-4"><h3 class="font-bold gold">Registrar resultado</h3><div><label class="label">Jornada / fecha</label><input id="matchDate" class="field" placeholder="Jornada 2" value="Jornada ${data.matches.length > 0 ? 2 : 1}"></div><div class="grid sm:grid-cols-2 gap-3"><div><label class="label">Equipo local</label><select id="matchHome" class="field">${teamOptions()}</select></div><div><label class="label">Equipo visitante</label><select id="matchAway" class="field">${teamOptions(data.teams[1]?.name)}</select></div><div><label class="label">Goles local</label><input id="homeGoals" class="field" type="number" min="0" max="99" required></div><div><label class="label">Goles visitante</label><input id="awayGoals" class="field" type="number" min="0" max="99" required></div></div><button class="btn btn-primary w-full">Guardar resultado y actualizar clasificación</button></form>`)}
+function addMatch(e){e.preventDefault();let home=document.getElementById('matchHome').value,away=document.getElementById('matchAway').value;if(home===away){toast('Elige dos equipos distintos');return}let hg=+document.getElementById('homeGoals').value,ag=+document.getElementById('awayGoals').value;data.matches.push({home,away,homeGoals:hg,awayGoals:ag,date:document.getElementById('matchDate').value||'Partido'});recalculateAllTeams();save();closeModal();renderAll();toast('Resultado guardado e integrado en la clasificación')}
+function deleteMatch(i){if(!confirm('¿Eliminar este partido? Se recalculará la clasificación.'))return;data.matches.splice(i,1);recalculateAllTeams();save();renderAll();toast('Partido eliminado')}
+function openSettings(){modal(`<form onsubmit="saveSettings(event)" class="space-y-4"><h3 class="font-bold gold">Ajustes del torneo</h3><div><label class="label">WhatsApp del administrador (con prefijo de país)</label><input id="whatsappNum" class="field" placeholder="34600111222" value="${esc(data.whatsappNum||'')}"><p class="text-xs text-slate-500 mt-1">Introduce solo números, por ejemplo 34 seguido del móvil español.</p></div><div><label class="label">Cambiar PIN de administrador</label><input id="newPin" class="field" type="password" inputmode="numeric" placeholder="Dejar vacío para mantener el actual"></div><button class="btn btn-primary w-full">Guardar ajustes</button></form><div class="border-t border-white/10 mt-5 pt-5"><h3 class="font-bold text-red-200">Zona peligrosa</h3><p class="text-sm text-slate-400 my-2">Reinicia estadísticas y partidos, manteniendo equipos y noticias.</p><button class="btn btn-danger w-full" onclick="resetTournament()">Reiniciar todo el torneo a cero</button></div>`)}
+function saveSettings(e){e.preventDefault();data.whatsappNum=document.getElementById('whatsappNum').value.replace(/\D/g,'');let p=document.getElementById('newPin').value;if(p)data.adminPin=p;save();closeModal();renderAll();toast('Ajustes guardados')}
+function resetTournament(){if(!confirm('¿Seguro? Se borrarán partidos y estadísticas individuales y se reiniciará la clasificación.'))return;if(!confirm('Confirmación final: reiniciar el torneo a cero.'))return;data.matches=[];data.players=[];recalculateAllTeams();save();closeModal();renderAll();toast('Torneo reiniciado a cero')}
+document.getElementById('mvpForm').addEventListener('submit',e=>{e.preventDefault();if(!data.whatsappNum){toast('El administrador todavía no ha configurado WhatsApp');return}let name=document.getElementById('voterName').value.trim(),team=document.getElementById('mvpTeam').value,reason=document.getElementById('mvpReason').value.trim();let msg=`🏆 VOTO MEJOR EQUIPO · Cañada Champions League FC 27%0A👤 Votante: ${name}%0A⭐ Mi equipo elegido: ${team}%0A${reason?'💬 Motivo: '+reason:''}`;window.open(`https://wa.me/${data.whatsappNum}?text=${encodeURIComponent(msg.replaceAll('%0A','\n'))}`,'_blank','noopener')});
+load();renderAll();
+</script>
+</body>
+</html>
