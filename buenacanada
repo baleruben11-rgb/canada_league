@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cañada Champions League · FC 27</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+:root{--bg:#070b19;--panel:#10172b;--panel2:#151e35;--gold:#eab308;--muted:#9ba8c4}
+*{box-sizing:border-box}body{background:radial-gradient(ellipse at 50% -10%,#17264c 0%,var(--bg) 48%);color:#f8fafc;font-family:Inter,ui-sans-serif,system-ui,-apple-system,sans-serif;min-height:100vh}
+.glass{background:linear-gradient(145deg,rgba(22,32,57,.94),rgba(12,18,35,.97));border:1px solid rgba(234,179,8,.14);box-shadow:0 12px 35px #0003}
+.gold{color:var(--gold)}.btn{border:1px solid #33415f;background:#18233e;padding:.65rem .9rem;border-radius:.75rem;font-weight:650;transition:.2s;cursor:pointer}.btn:hover{border-color:var(--gold);transform:translateY(-1px)}.btn-primary{background:var(--gold);color:#111827;border-color:var(--gold)}.btn-danger{border-color:#7f1d1d;color:#fecaca;background:#35151f}.navbtn{padding:.75rem .85rem;border-radius:.75rem;color:#b7c2d9;white-space:nowrap;cursor:pointer}.navbtn.active,.navbtn:hover{background:#26314b;color:#fff}.navbtn.active{box-shadow:inset 0 -2px var(--gold)}.field{width:100%;background:#090f20;border:1px solid #34415d;border-radius:.65rem;padding:.7rem .8rem;color:#fff;outline:none}.field:focus{border-color:var(--gold)}.field option{background:#10172b}.label{display:block;font-size:.78rem;color:#b5c0d5;margin:0 0 .35rem}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:680px}th{font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:#aebbd4;text-align:left;padding:.85rem .7rem;background:#0c1326}td{padding:.8rem .7rem;border-bottom:1px solid #27324a;font-size:.9rem}tbody tr:hover{background:#ffffff06}.badge{font-size:.7rem;padding:.25rem .5rem;border-radius:999px;background:#273450;color:#dce5f8}.team-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(135deg,#243458,#111a30);border:1px solid #394968;font-size:1.25rem}.statnum{font-size:1.7rem;font-weight:800;letter-spacing:-.04em}.hidden{display:none!important}.modal-bg{position:fixed;inset:0;background:#02040bd9;display:grid;place-items:center;padding:1rem;z-index:50}.modal{width:min(720px,100%);max-height:90vh;overflow:auto}.toast{position:fixed;bottom:1rem;right:1rem;background:#16243d;border:1px solid #eab30888;padding:.8rem 1rem;border-radius:1rem;z-index:80;box-shadow:0 12px 30px #0008}.hero-orb{position:absolute;border:1px solid #eab30830;border-radius:50%;width:340px;height:340px;right:-100px;top:-150px;pointer-events:none}.smallmuted{font-size:.8rem;color:var(--muted)}.news-img{width:100%;height:180px;object-fit:contain;background:#0b1120;cursor:pointer;transition:.2s;padding:4px}.news-img:hover{opacity:.9}.pill{border:1px solid #34415d;border-radius:999px;padding:.35rem .7rem;color:#cbd5e1;font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="max-w-7xl mx-auto px-4 md:px-6 pb-12">
+<header class="flex flex-col md:flex-row md:items-center justify-between gap-4 py-5 border-b border-white/10">
+ <div class="flex items-center gap-3"><div class="w-12 h-12 rounded-2xl bg-yellow-500/10 border border-yellow-500/40 grid place-items-center"><i data-lucide="trophy" class="gold w-7 h-7"></i></div><div><div class="text-xs uppercase tracking-[.25em] gold font-bold">Temporada 26/27</div><h1 class="text-xl md:text-2xl font-black tracking-tight">CAÑADA <span class="gold">CHAMPIONS</span> LEAGUE</h1><p class="text-xs text-slate-400">EA SPORTS FC 27 · La gloria se juega entre amigos</p></div></div>
+ <div class="flex flex-wrap items-center gap-2"><span class="pill"><span class="inline-block w-2 h-2 rounded-full bg-emerald-400 mr-2"></span>Competición activa</span><button class="btn" onclick="openAdmin()"><i data-lucide="shield-check" class="inline w-4 h-4 mr-1"></i>Admin</button></div>
+</header>
+<nav class="flex gap-1 overflow-x-auto py-3 border-b border-white/10" id="nav">
+<button class="navbtn active" data-view="inicio">Inicio</button><button class="navbtn" data-view="clasificacion">Clasificación</button><button class="navbtn" data-view="lideres">Líderes</button><button class="navbtn" data-view="partidos">Partidos</button><button class="navbtn" data-view="h2h">H2H</button><button class="navbtn" data-view="pronosticos">Pronósticos</button><button class="navbtn" data-view="noticias">Noticias</button><button class="navbtn" data-view="mvp">Votar MVP</button>
+</nav>
+<main class="pt-6">
+<section id="view-inicio" class="view space-y-6">
+ <div class="glass rounded-3xl p-6 md:p-9 relative overflow-hidden"><div class="hero-orb"></div><div class="relative max-w-2xl"><span class="badge gold">⚽ TEMPORADA OFICIAL 26/27</span><h2 class="text-3xl md:text-5xl font-black mt-4 leading-tight">Una copa.<br><span class="gold">Siete equipos de amigos.</span><br>Una sola leyenda.</h2><p class="text-slate-300 mt-4 max-w-xl">La competición de FC 27 donde los piques se convierten en historia. Consulta la clasificación, sigue las estadísticas y vota al MVP.</p><div class="flex flex-wrap gap-3 mt-6"><button class="btn btn-primary" onclick="setView('clasificacion')">Ver clasificación <i data-lucide="arrow-up-right" class="inline w-4 h-4"></i></button><button class="btn" onclick="setView('partidos')">Resultados y partidos</button></div></div></div>
+ <div class="grid grid-cols-2 lg:grid-cols-4 gap-3" id="homeStats"></div>
+ <div><div class="flex items-end justify-between mb-4"><div><p class="gold text-xs tracking-[.2em] font-bold uppercase">Los protagonistas</p><h2 class="text-2xl font-bold mt-1">Entrenadores y equipos</h2></div><span class="smallmuted">Temporada 26/27</span></div><div id="teamsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3"></div></div>
+ <div class="grid lg:grid-cols-2 gap-5"><div class="glass rounded-2xl p-5"><div class="flex justify-between items-center mb-4"><h3 class="font-bold text-lg">Últimos resultados</h3><button class="text-sm gold" onclick="setView('partidos')">Ver todos →</button></div><div id="recentMatches" class="space-y-3"></div></div><div class="glass rounded-2xl p-5"><div class="flex justify-between items-center mb-4"><h3 class="font-bold text-lg">Últimas noticias</h3><button class="text-sm gold" onclick="setView('noticias')">Ver todas →</button></div><div id="recentNews" class="space-y-3"></div></div></div>
+</section>
+<section id="view-clasificacion" class="view hidden space-y-5">
+ <div><p class="gold text-xs tracking-[.2em] font-bold uppercase">La carrera por la copa</p><h2 class="text-3
